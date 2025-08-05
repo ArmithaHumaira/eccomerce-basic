@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Produk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  </head>
+
+  <body class="bg-white text-gray-900">
+    <!-- Navbar -->
+  <nav class="bg-white flex items-center justify-between px-4 py-2 shadow sticky top-0 z-50">
+    <div class="flex items-center space-x-4">
+      <svg width="60" height="60" viewBox="0 0 101 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.625 46.2917H88.375V54.7083H12.625V46.2917ZM12.625 21.0417H88.375V29.4583H12.625V21.0417ZM12.625 71.5417H88.375V79.9583H12.625V71.5417Z" fill="#607D8B"/>
+      </svg>
+      <div class="text-2xl font-semibold tracking-wider">LLY’OUD</div>
+    </div>
+    <div class="flex-1 px-4">
+      <div class="relative max-w-xl mx-auto">
+        <input
+          type="text"
+          placeholder="Cari disini"
+          class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-200 text-sm placeholder-gray-500 focus:outline-none"
+        />
+        <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+    </div>
+    <div class="flex items-center space-x-5 text-sm text-gray-700">
+      <ion-icon name="notifications-circle-outline" size="large"></ion-icon>
+      <a href="cart.html" class="hover:underline"><ion-icon name="cart-outline" size="large">
+       
+      </ion-icon> <span style="color:red" id="keranjang-count"></span></a>
+      <a href="profile.html" id="profileBtn"><ion-icon name="person-circle-outline" size="large"></ion-icon></a>
+    </div>
+  </nav>
+
+  <!--Detail-->
+  <div class="max-w-[1000px] mx-auto p-5 bg-[#faf6ef] font-['Poppins']">
+    <div class="flex gap-[40px] bg-white p-[40px] rounded-[12px] shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+  
+      <!-- Gambar Produk -->
+      <div class="flex-1 text-center">
+        <img id="product-image" src="" alt="Product Image" class="max-w-full max-h-[400px] object-contain mx-auto" />
+      </div>
+  
+      <!-- Info Produk -->
+      <div class="flex-1 flex flex-col justify-center gap-[16px]">
+        <h1 id="product-name" class="text-[28px] font-semibold">Loading...</h1>
+        <div id="product-price" class="text-[20px] text-[#333]">Rp 0</div>
+        <div id="product-color" class="text-[16px] text-[#555]">warna: -</div>
+  
+        <!-- Tombol -->
+        <div class="flex items-center overflow-hidden rounded-[24px] border border-[#ccc] shadow-[0_2px_6px_rgba(0,0,0,0.1)] w-fit">
+          <button id="cart-button" class="bg-[#ffefd5] px-8 py-3 text-[16px] font-semibold border-none">MASUKAN KERANJANG</button>
+          <button id="buy-button" class="bg-[#a8eedc] px-8 py-3 text-[16px] font-semibold border-none">BELI</button>
+        </div>
+  
+        <!-- Info Pengiriman -->
+        <div class="text-[12px] text-[#333] mt-[20px] pt-[10px] border-t border-[#ccc]">
+          Pengiriman dari Rp10.000.<br />
+          Waktu pengiriman: 3-5 hari
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Footer -->
+  <footer class="mt-40 bg-gray-100 py-8 text-center">
+    <h3 class="text-green-700 font-semibold text-lg mb-2">Ikuti Kami</h3>
+    <div class="flex justify-center gap-6 text-3xl mb-2">
+      <a href="#"><img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" class="w-8"></a>
+      <a href="#"><img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube" class="w-8"></a>
+      <a href="#"><img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" class="w-8"></a>
+    </div>
+    <p class="text-sm text-gray-500">Copyright © 2025 LLY’OUD.</p>
+  </footer>
+
+  
+
+  <!--DETAIL.JS-->
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+    
+      let currentProduct = null;
+    
+      async function loadProduct() {
+        try {
+          const res = await fetch(`https://dummyjson.com/products/${id}`);
+          const data = await res.json();
+    
+          currentProduct = {
+            id: data.id,
+            name: data.title,
+            price: data.price * 16000,
+            color: "Lavender",
+            image: data.thumbnail,
+            quantity: 1
+          };
+    
+          document.getElementById("product-name").textContent = currentProduct.name;
+          document.getElementById("product-price").textContent = `Rp ${currentProduct.price.toLocaleString("id-ID")}`;
+          document.getElementById("product-color").textContent = `warna : ${currentProduct.color}`;
+          document.getElementById("product-image").src = currentProduct.image;
+        } catch (error) {
+          console.error("Failed to load product:", error);
+        }
+      }
+
+      function countKeranjang(){
+        const keranjang = JSON.parse(localStorage.getItem("cart")) || [] ;
+        const count = keranjang.length;
+        document.getElementById('keranjang-count').textContent = count;
+        
+      }
+    
+      function addToCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existing = cart.find(item => item.id === currentProduct.id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push(currentProduct);
+      }
+
+     
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Produk berhasil ditambahkan ke keranjang!");
+      // window.location.href = 'pembayaran.html'; // redirect setelah tambah ke keranjang
+    }
+    function refreshKeranjang(){
+      setInterval(() => {
+        countKeranjang()
+      }, 2000) 
+    }
+    document.getElementById("cart-button").addEventListener("click", addToCart);
+
+    
+    function buyNow() {
+      // Redirect langsung ke halaman pembayaran
+      window.location.href = "checkout-berhasil.html";
+    }      
+      document.getElementById("buy-button").addEventListener("click", buyNow);
+
+
+    
+      loadProduct();
+      refreshKeranjang()
+    </script>
+    
+    <script src="detail.js"></script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout ‑ LLY’OUD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- Navbar (copas dari cart) -->
+  <nav class="bg-white flex items-center justify-between px-4 py-2 shadow sticky top-0 z-50">
+    <!-- …isi navbar sama… -->
+  </nav>
+
+  <!-- FORM PEMBAYARAN -->
+  <main class="max-w-4xl mx-auto my-10 p-4">
+    <h1 class="text-2xl font-semibold text-center mb-8">Pembayaran</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col md:flex-row gap-6">
+      <!-- Form -->
+      <div class="flex-1 space-y-4">
+        <input id="nama"          type="text" placeholder="Nama"            class="w-full p-2 rounded bg-[#fef9e7] border">
+        <input id="alamat"        type="text" placeholder="Alamat"          class="w-full p-2 rounded bg-[#fef9e7] border">
+        <input id="telepon"       type="text" placeholder="Nomor Telepon"   class="w-full p-2 rounded bg-[#fef9e7] border">
+        <div class="space-y-2">
+          <label class="block font-medium text-gray-700">Metode Pembayaran</label>
+          <div class="flex gap-4 pt-2">
+            <label class="flex items-center gap-2 border rounded-lg bg-white px-4 py-2 shadow-sm w-40 h-14 cursor-pointer">
+              <input type="radio" name="bank" value="BCA" class="accent-yellow-500">
+              <img src="../img/1200px-Bank_Central_Asia.svg.png" alt="BCA" class="h-6 object-contain">
+            </label>
+            <label class="flex items-center gap-2 border rounded-lg bg-white px-4 py-2 shadow-sm w-40 h-14 cursor-pointer">
+              <input type="radio" name="bank" value="BSI" class="accent-yellow-500">
+              <img src="../img/images.png" alt="BSI" class="h-6 object-contain">
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ringkasan -->
+      <div class="bg-[#fef9e7] rounded p-4 w-full max-w-xs">
+        <h2 class="font-semibold mb-2">Ringkasan Order</h2>
+        <p>Harga Keseluruhan : <span id="totalCheckout">-</span></p>
+        <p>Warna : <span id="warnaCheckout">-</span></p>
+        <p>Tanggal Pengiriman : 08/12/23</p>
+
+        <button id="bayarBtn"
+          class="mt-4 bg-black text-white w-full py-2 rounded hover:bg-gray-800">
+          BAYAR
+        </button>
+      </div>
+    </div>
+  </main>
+
+
+
+  <!-- Footer -->
+  <footer class="mt-16 bg-gray-100 py-8 text-center">
+    <h3 class="text-green-700 font-semibold text-lg mb-2">Ikuti Kami</h3>
+    <div class="flex justify-center gap-6 text-3xl mb-2">
+      <a href="#"><img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" class="w-8"></a>
+      <a href="#"><img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube" class="w-8"></a>
+      <a href="#"><img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" class="w-8"></a>
+    </div>
+    <p class="text-sm text-gray-500">Copyright © 2025 LLY’OUD.</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    /* ---------- DATA TERPILIH ---------- */
+    const selectedItems = JSON.parse(localStorage.getItem("selectedItems")) || [];
+
+    if (!selectedItems.length) {
+      // Kalau user buka langsung tanpa pilih apa‑apa
+      alert("Tidak ada produk yang diproses.");
+      window.location.href = "cart.html";
+    }
+
+    /* ---------- RINGKASAN ---------- */
+    const total = selectedItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    const warna = selectedItems.map(i => i.color).join(", ");
+
+    document.getElementById("totalCheckout").textContent  = "Rp " + total.toLocaleString("id-ID");
+    document.getElementById("warnaCheckout").textContent  = warna;
+
+    /* ---------- BAYAR ---------- */
+    document.getElementById("bayarBtn").addEventListener("click", () => {
+      // Contoh validasi simpel
+      if (!document.getElementById("nama").value.trim())   return alert("Nama wajib diisi.");
+      if (!document.getElementById("alamat").value.trim()) return alert("Alamat wajib diisi.");
+      if (!document.querySelector("input[name='bank']:checked")) return alert("Pilih bank.");
+
+      // Update keranjang → hapus item terpilih
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const updated = cart.filter(c => !selectedItems.some(s => s.name === c.name));
+      localStorage.setItem("cart", JSON.stringify(updated));
+      localStorage.removeItem("selectedItems");
+
+      // Simulasi proses bayar
+      alert("Pembayaran berhasil!");
+      window.location.href = "checkout-berhasil.html";
+    });
+  </script>
+</body>
+</html>

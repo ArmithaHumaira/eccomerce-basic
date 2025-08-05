@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOME</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <link rel="stylesheet" href="../src/output.css/">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="bg-white flex items-center justify-between px-4 py-2 shadow sticky top-0 z-50">
+    <div class="flex items-center space-x-4">
+      <svg width="60" height="60" viewBox="0 0 101 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.625 46.2917H88.375V54.7083H12.625V46.2917ZM12.625 21.0417H88.375V29.4583H12.625V21.0417ZM12.625 71.5417H88.375V79.9583H12.625V71.5417Z" fill="#607D8B"/>
+      </svg>
+      <div class="text-2xl font-semibold tracking-wider">LLY’OUD</div>
+    </div>
+    <div class="flex-1 px-4">
+      <div class="relative max-w-xl mx-auto">
+        <input
+          type="text"
+          placeholder="Cari disini"
+          class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-200 text-sm placeholder-gray-500 focus:outline-none"
+        />
+        <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+    </div>
+    <div class="flex items-center space-x-5 text-sm text-gray-700">
+      <a href="cart.html" class="hover:underline"><ion-icon name="cart-outline" size="large"></ion-icon>  <span style="color:red" id="keranjang-count">1</span></a>
+      <button id="profileBtn"><ion-icon name="person-circle-outline" size="large"></ion-icon></button>
+    </div>
+  </nav>
+
+  <!-- Section: Promo -->
+  <section class="mt-6">
+    <div class="relative">
+      <img src="../img/banner web 1.jpg" alt="Promo" class="w-full h-auto object-cover" />
+    </div>
+  </section>
+
+  <!-- Produk akan dimuat di sini lewat JS -->
+  <section class="p-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6" id="product-grid"></div> 
+  </section>
+
+  <!-- Section: Welcome Promo -->
+<section class="bg-[#f7f0e8] py-12 px-4">
+  <!-- Judul -->
+  <div class="text-center mb-10">
+    <p class="italic font-medium text-lg">Welcome !</p>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-teal-800 uppercase">
+      Discover the products from our brand
+    </h2>
+  </div>
+
+  <!-- Promo Items -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto text-center">
+    
+    <!-- Promo 1 -->
+    <div class="flex flex-col items-center space-y-4">
+      <!-- Icon Tag -->
+      <svg width="98" height="98" viewBox="0 0 98 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M34.2183 86.24C36.5152 88.534 39.6287 89.8226 42.875 89.8226C46.1213 89.8226 49.2348 88.534 51.5317 86.24L85.5458 53.0833C87.9958 50.8375 89.8333 47.4892 89.8333 43.8958V24.5C89.8333 21.2511 88.5427 18.1353 86.2454 15.8379C83.9481 13.5406 80.8322 12.25 77.5833 12.25H58.1875C54.5942 12.25 51.2458 14.0875 49 16.5375L16.0475 50.7558C13.7535 53.0527 12.465 56.1662 12.465 59.4125C12.465 62.6588 13.7535 65.7723 16.0475 68.0692L34.2183 86.24ZM37.1175 83.3408L18.9467 65.17C15.7617 61.985 15.7617 56.7992 18.9467 53.6142L52.6342 18.7017C53.9817 17.15 55.9417 16.3333 58.1875 16.3333L77.7058 16.2108C82.1975 16.2108 85.75 20.0083 85.75 24.5V43.8958C85.75 46.1417 84.9333 48.1017 83.3817 49.4492L48.6733 83.3408C45.4883 86.5258 40.3025 86.5258 37.1175 83.3408ZM71.4583 20.4167C68.7509 20.4167 66.1544 21.4922 64.24 23.4066C62.3255 25.3211 61.25 27.9176 61.25 30.625C61.25 33.3324 62.3255 35.9289 64.24 37.8434C66.1544 39.7578 68.7509 40.8333 71.4583 40.8333C74.1658 40.8333 76.7623 39.7578 78.6767 37.8434C80.5912 35.9289 81.6667 33.3324 81.6667 30.625C81.6667 27.9176 80.5912 25.3211 78.6767 23.4066C76.7623 21.4922 74.1658 20.4167 71.4583 20.4167ZM71.4583 24.5C73.0828 24.5 74.6407 25.1453 75.7894 26.294C76.938 27.4426 77.5833 29.0005 77.5833 30.625C77.5833 32.2495 76.938 33.8074 75.7894 34.956C74.6407 36.1047 73.0828 36.75 71.4583 36.75C69.8339 36.75 68.276 36.1047 67.1273 34.956C65.9787 33.8074 65.3333 32.2495 65.3333 30.625C65.3333 29.0005 65.9787 27.4426 67.1273 26.294C68.276 25.1453 69.8339 24.5 71.4583 24.5Z" fill="black"/>
+        </svg>
+      <p class="max-w-xs text-sm text-gray-800">
+        Dapatkan diskon langsung sebesar 15% untuk pesanan pertama dan Cashback 15% untuk semua pesananmu berikutnya.
+      </p>
+      <p class="text-lg font-semibold text-cyan-600">
+        DISCOUNT 15% DAN CASHBACK 15%
+      </p>
+    </div>
+
+    <!-- Promo 2 -->
+    <div class="flex flex-col items-center space-y-4">
+      <!-- Icon Truck -->
+      <svg width="97" height="97" viewBox="0 0 97 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22.2291 56.5833C24.5584 56.5828 26.8164 57.3871 28.6208 58.8601C30.4253 60.3331 31.6653 62.3843 32.1312 64.6666H60.625V24.2499H16.1666C14.0228 24.2499 11.9668 25.1016 10.4508 26.6175C8.93493 28.1334 8.08329 30.1894 8.08329 32.3333V64.6666H12.327C12.7929 62.3843 14.033 60.3331 15.8374 58.8601C17.6419 57.3871 19.8998 56.5828 22.2291 56.5833ZM22.2291 76.7916C19.8998 76.7921 17.6419 75.9877 15.8374 74.5147C14.033 73.0417 12.7929 70.9905 12.327 68.7083H4.04163V32.3333C4.04163 29.1175 5.31908 26.0335 7.59296 23.7596C9.86683 21.4857 12.9509 20.2083 16.1666 20.2083H60.625C61.6969 20.2083 62.7249 20.6341 63.4828 21.392C64.2408 22.15 64.6666 23.178 64.6666 24.2499V32.3333H76.7916L88.9166 48.4999V68.7083H80.6312C80.1674 70.9924 78.9282 73.0459 77.1236 74.5209C75.3189 75.9959 73.0599 76.8017 70.7291 76.8017C68.3984 76.8017 66.1393 75.9959 64.3347 74.5209C62.5301 73.0459 61.2909 70.9924 60.827 68.7083H32.1312C31.6653 70.9905 30.4253 73.0417 28.6208 74.5147C26.8164 75.9877 24.5584 76.7921 22.2291 76.7916ZM22.2291 60.6249C20.6213 60.6249 19.0792 61.2636 17.9423 62.4006C16.8054 63.5375 16.1666 65.0795 16.1666 66.6874C16.1666 68.2953 16.8054 69.8373 17.9423 70.9742C19.0792 72.1112 20.6213 72.7499 22.2291 72.7499C23.837 72.7499 25.379 72.1112 26.516 70.9742C27.6529 69.8373 28.2916 68.2953 28.2916 66.6874C28.2916 65.0795 27.6529 63.5375 26.516 62.4006C25.379 61.2636 23.837 60.6249 22.2291 60.6249ZM70.7291 56.5833C73.0584 56.5828 75.3164 57.3871 77.1208 58.8601C78.9253 60.3331 80.1653 62.3843 80.6312 64.6666H84.875V49.7932L83.905 48.4999H64.6666V58.6041C66.3641 57.3512 68.4658 56.5833 70.7291 56.5833ZM70.7291 60.6249C69.1212 60.6249 67.5792 61.2636 66.4423 62.4006C65.3054 63.5375 64.6666 65.0795 64.6666 66.6874C64.6666 68.2953 65.3054 69.8373 66.4423 70.9742C67.5792 72.1112 69.1212 72.7499 70.7291 72.7499C72.337 72.7499 73.879 72.1112 75.016 70.9742C76.1529 69.8373 76.7916 68.2953 76.7916 66.6874C76.7916 65.0795 76.1529 63.5375 75.016 62.4006C73.879 61.2636 72.337 60.6249 70.7291 60.6249ZM64.6666 36.3749V44.4583H80.8333L74.7708 36.3749H64.6666Z" fill="black"/>
+      </svg>
+      <p class="max-w-xs text-sm text-gray-800">
+        Nikmati rangkaian produk dari Welcome Program kami, dan dapatkan gratis ongkir dengan minimum pembelanjaan.
+      </p>
+      <p class="text-lg font-semibold text-cyan-600">
+        PROGRAM DAN GRATIS ONGKIR
+      </p>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-50 py-6 text-center">
+    <h3 class="text-green-700 font-semibold text-lg mb-2">Ikuti Kami</h3>
+    <div class="flex justify-center gap-6 text-3xl mb-2">
+      <a href="#"><img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" class="w-8"></a>
+      <a href="#"><img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube" class="w-8"></a>
+      <a href="#"><img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" class="w-8"></a>
+    </div>
+    <p class="text-sm text-gray-600">Copyright © 2025 LLY’OUD.</p>
+  </footer>
+
+
+  
+<!-- Overlay Background -->
+<div id="overlayBg" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
+
+<!-- Profile Popup -->
+<div id="profilePopup" class="hidden fixed inset-0 flex items-center justify-center z-50">
+  <div class="bg-[#fef9e7] rounded-md shadow-md w-full max-w-md p-6 relative">
+    
+    <!-- TOMBOL × -->
+    <button id="closePopupBtn" class="absolute top-2 right-2 text-2xl text-gray-600 hover:text-red-600">&times;</button>
+
+    <!-- Ikon dan Username -->
+    <div class="flex flex-col items-center mb-6">
+      <div class="bg-black rounded-full p-3">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+        </svg>
+      </div>
+      <h2 class="mt-3 text-lg font-bold text-gray-900 tracking-wide text-center">BALERINA_CAPUCINA</h2>
+    </div>
+
+    <!-- Form Profile -->
+    <div class="space-y-3 text-sm text-gray-800">
+      <div>
+        <label class="font-semibold block">Nama</label>
+        <input id="nama" type="text" disabled class="w-full rounded-md bg-[#fff8dc] px-3 py-2 border border-gray-300 text-gray-700" />
+      </div>
+      <div>
+        <label class="font-semibold block">Nomer Telpon</label>
+        <input id="telp" type="text" disabled class="w-full rounded-md bg-[#fff8dc] px-3 py-2 border border-gray-300 text-gray-700" />
+      </div>
+      <div>
+        <label class="font-semibold block">Gmail</label>
+        <input id="gmail" type="text" disabled class="w-full rounded-md bg-[#fff8dc] px-3 py-2 border border-gray-300 text-gray-700" />
+      </div>
+      <div>
+        <label class="font-semibold block">Alamat</label>
+        <input id="alamat" type="text" disabled class="w-full rounded-md bg-[#fff8dc] px-3 py-2 border border-gray-300 text-gray-700" />
+      </div>
+    </div>
+
+    <!-- Tombol Edit dan Logout -->
+    <div class="mt-6 flex justify-between items-center">
+      <button id="editBtn" class="text-sm font-semibold text-blue-600 hover:underline">Edit</button>
+      <button id="logout" class="text-sm font-semibold hover:underline">Logout →</button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Js Home Page -->
+<script>
+  // Ambil dan tampilkan produk
+  fetch('https://dummyjson.com/products')
+    .then(res => res.json())
+    .then(data => {
+      const products = data.products;
+      const container = document.getElementById('product-grid');
+
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden cursor-pointer';
+        card.innerHTML = `
+          <img src="${product.thumbnail}" alt="${product.title}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-1">${product.title}</h3>
+            <p class="text-sm text-gray-600 line-clamp-2 mb-2">${product.description}</p>
+            <p class="text-teal-700 font-bold text-md mb-2">$${product.price}</p>
+            <button class="mt-2 bg-teal-500 text-white px-4 py-2 rounded-full text-sm hover:bg-teal-600">Beli Sekarang</button>
+            <button class="add-to-cart-btn text-sm text-white px-2 py-1 rounded" data-id="${product.id}" data-title="${product.title}" data-price="${product.price}">🛒</button>
+          </div>
+        `;
+
+  const addToCartBtn = card.querySelector('.add-to-cart-btn');
+  addToCartBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    const id = product.id;
+  const title = product.title;
+  const price = product.price;
+  const name = product.title;
+  const color = product.color || "Merah"; // fallback warna
+  const thumbnail = product.thumbnail;
+
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find(item => item.id === id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({
+  id,
+  name,
+  price,
+  color,
+  thumbnail,
+  quantity: 1
+});
+
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateKeranjangCount();
+    alert("Produk ditambahkan ke keranjang!");
+  });
+  
+        // Klik kartu akan buka halaman detail
+        card.addEventListener('click', () => {
+          window.location.href = `product-detail.html?id=${product.id}`;
+        });
+
+        container.appendChild(card);
+      });
+      
+    })
+    .catch(err => {
+      console.error('Gagal mengambil produk:', err);
+    });
+
+ // Profile popup 
+const profileBtn = document.getElementById('profileBtn');
+const profilePopup = document.getElementById('profilePopup');
+const overlayBg = document.getElementById('overlayBg');
+const editBtn = document.getElementById('editBtn');
+
+const nama = document.getElementById('nama');
+const telp = document.getElementById('telp');
+const gmail = document.getElementById('gmail');
+const alamat = document.getElementById('alamat');
+
+// Menampilkan profile pop up
+profileBtn?.addEventListener('click', (e) => {
+  e.preventDefault();
+  profilePopup.classList.toggle('hidden');
+  overlayBg.classList.toggle('hidden');
+
+  // Ambil data dari localStorage
+  nama.value = localStorage.getItem('profileNama') || "Balerina lala";
+  telp.value = localStorage.getItem('profileTelp') || "+62 89078-3460-1220";
+  gmail.value = localStorage.getItem('profileGmail') || "balerina_lalala@gmail.com";
+  alamat.value = localStorage.getItem('profileAlamat') || "Jl. Melati, Blok c4, simpang raya";
+});
+
+// Tutup popup jika klik di luar atau klik overlay
+window.addEventListener('click', (e) => {
+  const clickedOutside = !profilePopup.contains(e.target) &&
+                         e.target !== profileBtn &&
+                         !profileBtn.contains(e.target);
+  const clickedOverlay = e.target === overlayBg;
+
+  if (clickedOutside || clickedOverlay) {
+    profilePopup.classList.add('hidden');
+    overlayBg.classList.add('hidden');
+  }
+});
+
+// Toggle Edit // Simpan //catatan
+//Togle seperti saklar berfungsi untuk switch on/off
+
+let editMode = false;
+editBtn.addEventListener('click', () => {
+  editMode = !editMode;
+
+  nama.disabled = !editMode;
+  telp.disabled = !editMode;
+  gmail.disabled = !editMode;
+  alamat.disabled = !editMode;
+
+  editBtn.textContent = editMode ? "Simpan" : "Edit";
+
+  if (!editMode) {
+    // Simpan ke localStorage saat selesai edit
+    localStorage.setItem('profileNama', nama.value);
+    localStorage.setItem('profileTelp', telp.value);
+    localStorage.setItem('profileGmail', gmail.value);
+    localStorage.setItem('profileAlamat', alamat.value);
+  }
+});
+
+// Tombol logout (hapus data + tutup popup)
+document.getElementById('logout').addEventListener('click', () => {
+  localStorage.removeItem('profileNama');
+  localStorage.removeItem('profileTelp');
+  localStorage.removeItem('profileGmail');
+  localStorage.removeItem('profileAlamat');
+  alert("Berhasil logout!");
+  profilePopup.classList.add('hidden');
+  overlayBg.classList.add('hidden');
+});
+
+ // Tombol × untuk menutup popup
+ document.getElementById('closePopupBtn').addEventListener('click', () => {
+      profilePopup.classList.add('hidden');
+      overlayBg.classList.add('hidden');
+    });
+
+
+
+// ==== Tampilkan jumlah produk di keranjang ====
+function updateKeranjangCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalQty = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+    const badge = document.getElementById("keranjang-count");
+    if (badge) {
+      badge.textContent = totalQty;
+    }
+  }
+
+  // Jalankan saat halaman selesai dimuat
+  document.addEventListener("DOMContentLoaded", updateKeranjangCount);
+
+</script>
+</body>
+</html>
+

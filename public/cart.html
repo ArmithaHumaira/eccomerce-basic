@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keranjang - LLY’OUD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="bg-white flex items-center justify-between px-4 py-2 shadow sticky top-0 z-50">
+    <div class="flex items-center space-x-4">
+      <svg width="60" height="60" viewBox="0 0 101 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.625 46.2917H88.375V54.7083H12.625V46.2917ZM12.625 21.0417H88.375V29.4583H12.625V21.0417ZM12.625 71.5417H88.375V79.9583H12.625V71.5417Z" fill="#607D8B"/>
+      </svg>
+      <div class="text-2xl font-semibold tracking-wider">LLY’OUD</div>
+    </div>
+    <div class="flex-1 px-4">
+      <div class="relative max-w-xl mx-auto">
+        <input type="text" placeholder="Cari disini"
+          class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-200 text-sm placeholder-gray-500 focus:outline-none"/>
+        <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z"
+            clip-rule="evenodd"/>
+        </svg>
+      </div>
+    </div>
+    <div class="flex items-center space-x-5 text-sm text-gray-700">
+      <ion-icon name="notifications-circle-outline" size="large"></ion-icon>
+      <a href="cart.html"><ion-icon name="cart-outline" size="large"></ion-icon></a>
+      <a href="profile.html"><ion-icon name="person-circle-outline" size="large"></ion-icon></a>
+    </div>
+  </nav>
+
+  <!-- Keranjang -->
+  <main class="max-w-6xl mx-auto mt-10 p-4">
+    <h1 class="text-center text-2xl font-medium mb-8">Keranjang</h1>
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Produk List -->
+      <div id="cart-items" class="md:col-span-2 bg-[#fef9e7] rounded-lg p-6 space-y-6">
+        <!-- Produk akan dimasukkan di sini oleh JavaScript -->
+      </div>
+
+<!-- Ringkasan -->
+<div class="bg-[#fef9e7] rounded p-4 w-full max-w-xs">
+  <h2 class="font-semibold mb-2">Ringkasan Order</h2>
+  <p id="total-price">Harga Keseluruhan: Rp 0</p>
+  <p>Warna: <span id="overlay-color">-</span></p>
+  <p>Tanggal Pengiriman: 08/12/23</p>
+  <button id="beliButton" class="mt-4 bg-yellow-500 text-white w-full py-2 rounded hover:bg-yellow-600">BELI</button>
+</div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 bg-gray-100 py-8 text-center">
+    <h3 class="text-green-700 font-semibold text-lg mb-2">Ikuti Kami</h3>
+    <div class="flex justify-center gap-6 text-3xl mb-2">
+      <a href="#"><img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" class="w-8"></a>
+      <a href="#"><img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube" class="w-8"></a>
+      <a href="#"><img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" class="w-8"></a>
+    </div>
+    <p class="text-sm text-gray-500">Copyright © 2025 LLY’OUD.</p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    let keranjang = JSON.parse(localStorage.getItem("cart")) || [];
+
+const container = document.getElementById("cart-items");
+const totalPriceEl = document.getElementById("total-price");
+const overlayColorEl = document.getElementById("overlay-color");
+
+function renderKeranjang() {
+  container.innerHTML = "";
+  let total = 0;
+
+  if (keranjang.length === 0) {
+    container.innerHTML = "<p class='text-center text-gray-500'>Keranjang kosong.</p>";
+    totalPriceEl.textContent = "Harga keseluruhan : Rp 0";
+    overlayColorEl.textContent = "-";
+    return;
+  }
+
+  keranjang.forEach((item, index) => {
+    const div = document.createElement("div");
+    const countprice = item.quantity * item.price;
+    div.className = "relative flex items-center space-x-4 p-4 bg-white rounded-lg shadow";
+
+    div.innerHTML = `
+      <button class="absolute top-0 right-0 text-red-500 text-xl p-2" onclick="hapusProduk(${index})">×</button>
+      <input type="checkbox" class="checkbox-item w-5 h-5 accent-yellow-500" data-index="${index}" />
+      <img src="${item.thumbnail || item.image}" class="w-24 h-24 object-cover rounded border" />
+      <div>
+        <h3 class="font-semibold">${item.name}</h3>
+        <p class="text-blue-600 font-semibold">Rp ${item.price.toLocaleString("id-ID")}</p>
+        <p class="text-sm text-gray-600">warna : ${item.color}</p>
+      </div>
+      <div class="ml-auto flex items-center space-x-2">
+        <button class="px-2 border rounded bg-white" onclick="ubahJumlah(${index}, -1)">-</button>
+        <span>${item.quantity}</span>
+        <button class="px-2 border rounded bg-white" onclick="ubahJumlah(${index}, 1)">+</button>
+      </div>
+    `;
+
+    container.appendChild(div);
+    total += countprice;
+  });
+
+  updateTotalDariCheckbox();
+}
+
+function ubahJumlah(index, delta) {
+  keranjang[index].quantity += delta;
+  if (keranjang[index].quantity <= 0) {
+    if (confirm("Jumlah produk 0. Hapus dari keranjang?")) {
+      keranjang.splice(index, 1);
+    } else {
+      keranjang[index].quantity = 1;
+    }
+  }
+  localStorage.setItem("cart", JSON.stringify(keranjang));
+  renderKeranjang();
+}
+
+function hapusProduk(index) {
+  if (!confirm("Yakin ingin menghapus produk ini?")) return;
+  keranjang.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(keranjang));
+  renderKeranjang();
+}
+
+function updateTotalDariCheckbox() {
+  const checkboxes = document.querySelectorAll(".checkbox-item");
+  let total = 0;
+  let warna = "-";
+
+  checkboxes.forEach((cb) => {
+    if (cb.checked) {
+      const index = parseInt(cb.dataset.index);
+      const item = keranjang[index];
+      total += item.quantity * item.price;
+      warna = item.color; // update warna dengan item terakhir yang dicentang
+    }
+  });
+
+  totalPriceEl.textContent = "Harga keseluruhan : Rp " + total.toLocaleString("id-ID");
+  overlayColorEl.textContent = warna;
+}
+
+document.addEventListener("change", (e) => {
+  if (e.target.classList.contains("checkbox-item")) {
+    updateTotalDariCheckbox();
+  }
+});
+
+document.getElementById("beliButton").addEventListener("click", () => {
+  const checkboxes = document.querySelectorAll(".checkbox-item:checked");
+  if (checkboxes.length === 0) {
+    alert("Pilih produk yang ingin dibeli!");
+    return;
+  }
+
+  let total = 0;
+  let warna = "-";
+  const selectedItems = [];
+
+  checkboxes.forEach((cb) => {
+    const index = parseInt(cb.dataset.index);
+    const item = keranjang[index];
+    total += item.quantity * item.price;
+    warna = item.color;
+    selectedItems.push(item);
+  });
+
+  totalPriceEl.textContent = "Harga keseluruhan : Rp " + total.toLocaleString("id-ID");
+  overlayColorEl.textContent = warna;
+  localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+
+  // Pindah ke checkout.html
+  window.location.href = "checkout-berhasil.html";
+});
+
+function selesaikanPembayaran() {
+  const selectedItems = JSON.parse(localStorage.getItem("selectedItems")) || [];
+
+  keranjang = keranjang.filter(item => !selectedItems.some(sel => sel.name === item.name));
+  localStorage.setItem("cart", JSON.stringify(keranjang));
+  localStorage.removeItem("selectedItems");
+
+  setTimeout(() => {
+    window.location.href = "../checkout-berhasil.html";
+  }, 1500);
+}
+
+renderKeranjang();
+updateKeranjangCount();
+
+  </script>
+
+</body>
+</html>
